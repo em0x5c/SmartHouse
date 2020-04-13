@@ -11,8 +11,8 @@ class ConditionerTest {
     @Test
     public void increaseCurrentTemperatureTest(){
         Conditioner conditioner = new Conditioner();
-        conditioner.setMaxTemperature(25);
         conditioner.setMinTemperature(12);
+        conditioner.setMaxTemperature(25);
 
         assertEquals(0, conditioner.getCurrentTemperature());
         conditioner.setCurrentTemperature(22);
@@ -26,10 +26,11 @@ class ConditionerTest {
      * Тестирует, что increaseCurrentTemperature не увеличивает температуру при достижении максимального значения
      */
     @Test
-    public void increaseMaxCurrentTemperatureTest(){
+    public void shouldNotExceedMaxTemperatureTest() {
         Conditioner conditioner = new Conditioner();
-        conditioner.setMaxTemperature(25);
         conditioner.setMinTemperature(12);
+        conditioner.setMaxTemperature(25);
+
 
         assertEquals(0, conditioner.getCurrentTemperature());
         conditioner.setCurrentTemperature(25);
@@ -45,8 +46,8 @@ class ConditionerTest {
     @Test
     public void decreaseCurrentTemperatureTest(){
         Conditioner conditioner = new Conditioner();
-        conditioner.setMaxTemperature(25);
         conditioner.setMinTemperature(12);
+        conditioner.setMaxTemperature(25);
 
         assertEquals(0, conditioner.getCurrentTemperature());
         conditioner.setCurrentTemperature(22);
@@ -60,10 +61,10 @@ class ConditionerTest {
      * Тестирует, что decreaseCurrentTemperature не уменьшает температуру при достижении минимального значения
      */
     @Test
-    public void decreaseMinCurrentTemperatureTest(){
+    public void shouldNotLowerMinTemperatureTest(){
         Conditioner conditioner = new Conditioner();
-        conditioner.setMaxTemperature(25);
         conditioner.setMinTemperature(12);
+        conditioner.setMaxTemperature(25);
 
         assertEquals(0, conditioner.getCurrentTemperature());
         conditioner.setCurrentTemperature(12);
