@@ -25,7 +25,7 @@ public class RadioTest {
      * для значений из интервала [minChannel, maxChannel).
      */
     @Test
-    public void increaseCurrentChanelTest() {
+    public void increaseCurrentChannelTest() {
         Radio radio = new Radio();
         radio.setCurrentChannel(4);
         radio.nextChannel();
