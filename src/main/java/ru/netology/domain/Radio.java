@@ -2,12 +2,34 @@ package ru.netology.domain;
 
 public class Radio {
     private final static int minChannel = 0;
-    private final static int maxChannel = 9;
+    private final int maxChannel;
     private int currentChannel = minChannel;
 
     private final static int minVolume = 0;
-    private final static int maxVolume = 10;
+    private final static int maxVolume = 100;
     private int currentVolume = minVolume;
+
+    /**
+     * Создает новый экземпляр класса Radio с максимальным количеством радиостанций,
+     * определяемых параметром maxChannel.
+     * Радиостанции нумеруются от 0 до maxChannel - 1.
+     * Уровень звука по умолчанию равен 0.
+     *
+     * @param maxChannel Максимальное количество радиостанций.
+     */
+    public Radio(int maxChannel) {
+        this.maxChannel = maxChannel;
+    }
+
+    /**
+     * Создает новый экземпляр класса Radio с максимальным количеством радиостанций,
+     * по умолчанию равным 10.
+     * Радиостанции нумеруются от 0 до 9.
+     * Уровень звука по умолчанию равен 0.
+     */
+    public Radio() {
+       this.maxChannel = 10;
+    }
 
     public int getCurrentVolume() {
         return currentVolume;
@@ -43,7 +65,7 @@ public class Radio {
         if (currentChannel < minChannel) {
             return;
         }
-        if (currentChannel > maxChannel) {
+        if (currentChannel >= maxChannel) {
             return;
         }
 
@@ -51,7 +73,7 @@ public class Radio {
     }
 
     public void nextChannel() {
-        if (currentChannel == maxChannel) {
+        if (currentChannel == maxChannel - 1) {
             currentChannel = minChannel;
         }
         else {
@@ -61,7 +83,7 @@ public class Radio {
 
     public void prevChannel() {
         if (currentChannel == minChannel) {
-            currentChannel = maxChannel;
+            currentChannel = maxChannel - 1;
         }
         else {
             currentChannel--;

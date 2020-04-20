@@ -7,7 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class RadioTest {
     /**
      * Тестирует корректность установки текущего канала,
-     * а также отсутствие возможности установки ниже минимума (0) и выше максимума (9).
+     * а также отсутствие возможности установки ниже минимума (0) и выше максимума,
+     * задаваемого при создании объекта Radio.
      */
     @Test
     public void setCurrentChannelTest() {
@@ -26,7 +27,7 @@ public class RadioTest {
      */
     @Test
     public void increaseCurrentChannelTest() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(20);
         radio.setCurrentChannel(4);
         radio.nextChannel();
         assertEquals(5, radio.getCurrentChannel());
@@ -38,8 +39,8 @@ public class RadioTest {
      */
     @Test
     public void shouldSwitchToMinChannelWhenCurrentChannelIsMaxTest() {
-        Radio radio = new Radio();
-        radio.setCurrentChannel(9);
+        Radio radio = new Radio(20);
+        radio.setCurrentChannel(19);
         radio.nextChannel();
         assertEquals(0, radio.getCurrentChannel());
     }
@@ -50,7 +51,7 @@ public class RadioTest {
      */
     @Test
     public void decreaseCurrentChannelTest() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(20);
         radio.setCurrentChannel(4);
         radio.prevChannel();
         assertEquals(3, radio.getCurrentChannel());
@@ -62,22 +63,22 @@ public class RadioTest {
      */
     @Test
     public void shouldSwitchToMaxChannelWhenCurrentChannelIsMinTest() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(20);
         radio.setCurrentChannel(0);
         radio.prevChannel();
-        assertEquals(9, radio.getCurrentChannel());
+        assertEquals(19, radio.getCurrentChannel());
     }
 
     /**
      * Тестирует корректность установки текущего уровня громкоти звука,
-     * а также отсутствие возможности установки ниже минимума (0) и выше максимума (10).
+     * а также отсутствие возможности установки ниже минимума (0) и выше максимума (100).
      */
     @Test
     public void setCurrentVolumeTest() {
         Radio radio = new Radio();
         radio.setCurrentVolume(4);
         assertEquals(4, radio.getCurrentVolume());
-        radio.setCurrentVolume(11);
+        radio.setCurrentVolume(101);
         assertEquals(4, radio.getCurrentVolume());
         radio.setCurrentVolume(-1);
         assertEquals(4, radio.getCurrentVolume());
@@ -85,7 +86,7 @@ public class RadioTest {
 
     /**
      * Тестирует корректность работы метода {@link Radio#increaseVolume()}
-     * для значений из интервала [minVolume, maxVilume).
+     * для значений из интервала [minVolume, maxVolume).
      */
     @Test
     public void increaseCurrentVolumeTest() {
@@ -102,14 +103,14 @@ public class RadioTest {
     @Test
     public void shouldNotExceedMaxVolumeTest() {
         Radio radio = new Radio();
-        radio.setCurrentVolume(10);
+        radio.setCurrentVolume(100);
         radio.increaseVolume();
-        assertEquals(10, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     /**
      * Тестирует корректность работы метода {@link Radio#decreaseVolume()}
-     * для значений из интервала (minVolume, maxVilume].
+     * для значений из интервала (minVolume, maxVolume].
      */
     @Test
     public void decreaseCurrentVolumeTest() {
